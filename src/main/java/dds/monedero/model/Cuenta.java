@@ -19,10 +19,6 @@ public class Cuenta {
       this.movimientos = movimientos;
   }
 
-  public void setMovimientos(List<Movimiento> movimientos) {
-    this.movimientos = movimientos;
-  }
-
   public void poner(double cuanto) {
     this.hayMontoNegativo(cuanto);
     this.seSuperoCantMaxDepositos();
