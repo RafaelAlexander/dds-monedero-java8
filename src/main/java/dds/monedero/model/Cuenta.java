@@ -13,8 +13,10 @@ public class Cuenta {
   private double saldoInicial;
   private List<Movimiento> movimientos = new ArrayList<>();
 
-  public Cuenta(double montoInicial) {
+  public Cuenta(double montoInicial, List<Movimiento> movimientos) {
     this.saldoInicial = montoInicial;
+    if(movimientos!=null)
+    this.movimientos = movimientos;
   }
 
   public void setMovimientos(List<Movimiento> movimientos) {
@@ -66,6 +68,6 @@ public class Cuenta {
   }
 
   public double getSaldo() {
-    return this.movimientos.stream().mapToDouble(Movimiento::getMonto).sum() + this.saldoInicial;
+      return this.movimientos.stream().mapToDouble(Movimiento::getMonto).sum() + this.saldoInicial;
   }
 }

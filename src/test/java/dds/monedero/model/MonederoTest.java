@@ -7,6 +7,9 @@ import dds.monedero.exceptions.SaldoMenorException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonederoTest {
@@ -14,7 +17,7 @@ public class MonederoTest {
 
   @BeforeEach
   void init() {
-    cuenta = new Cuenta();
+    cuenta = new Cuenta(0, null);
   }
 
   @Test
@@ -37,25 +40,24 @@ public class MonederoTest {
   @Test
   void MasDeTresDepositos() {
     assertThrows(MaximaCantidadDepositosException.class, () -> {
-          cuenta.poner(1500);
-          cuenta.poner(456);
-          cuenta.poner(1900);
-          cuenta.poner(245);
+      cuenta.poner(1500);
+      cuenta.poner(456);
+      cuenta.poner(1900);
+      cuenta.poner(245);
     });
   }
 
   @Test
   void ExtraerMasQueElSaldo() {
     assertThrows(SaldoMenorException.class, () -> {
-          cuenta.setSaldo(90);
-          cuenta.sacar(1001);
+      cuenta.sacar(1001);
     });
   }
 
   @Test
   public void ExtraerMasDe1000() {
     assertThrows(MaximoExtraccionDiarioException.class, () -> {
-      cuenta.setSaldo(5000);
+      cuenta.poner(2000);
       cuenta.sacar(1001);
     });
   }
