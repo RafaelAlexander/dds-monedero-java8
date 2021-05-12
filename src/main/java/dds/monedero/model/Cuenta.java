@@ -71,6 +71,10 @@ public class Cuenta {
   }
 
   public double getSaldo() {
-    return this.movimientos.stream().mapToDouble(Movimiento::getMonto).sum() + this.saldoInicial;
+    return this.sacarMontoSegun(true) - sacarMontoSegun(false);
+  }
+
+  private double sacarMontoSegun(Boolean depositado) {
+    return this.movimientos.stream().filter(movimiento -> movimiento.isDeposito() == depositado).mapToDouble(Movimiento::getMonto).sum();
   }
 }

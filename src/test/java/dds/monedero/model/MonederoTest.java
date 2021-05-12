@@ -8,8 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Collections;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonederoTest {
@@ -23,6 +23,7 @@ public class MonederoTest {
   @Test
   void Poner() {
     cuenta.poner(1500);
+    assertEquals(this.cuenta.getMovimientos().get(0).getMonto(), 1500);
   }
 
   @Test
@@ -35,6 +36,7 @@ public class MonederoTest {
     cuenta.poner(1500);
     cuenta.poner(456);
     cuenta.poner(1900);
+    assertEquals(this.cuenta.getMovimientos().size(), 3);
   }
 
   @Test
@@ -67,4 +69,17 @@ public class MonederoTest {
     assertThrows(MontoNegativoException.class, () -> cuenta.sacar(-500));
   }
 
+  @Test
+  public void MontoExtraidoEnFecha() {
+    this.cuenta.poner(2000);
+    this.cuenta.sacar(500);
+    assertEquals(this.cuenta.getMontoExtraidoA(LocalDate.now()), 500);
+  }
+
+  @Test
+  public void SaldoActual() {
+    this.cuenta.poner(200);
+    this.cuenta.sacar(100);
+    assertEquals(this.cuenta.getSaldo(), 200 - 100);
+  }
 }
