@@ -10,14 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cuenta {
-
-  private double saldo;
   private double saldoInicial;
   private List<Movimiento> movimientos = new ArrayList<>();
-
-  public Cuenta() {
-    saldo = 0;
-  }
 
   public Cuenta(double montoInicial) {
     this.saldoInicial = montoInicial;
@@ -74,9 +68,4 @@ public class Cuenta {
   public double getSaldo() {
     return this.movimientos.stream().mapToDouble(Movimiento::getMonto).sum() + this.saldoInicial;
   }
-
-  public void setSaldo(double saldo) {
-    this.saldo = saldo;
-  }
-
 }
