@@ -72,7 +72,7 @@ public class Cuenta {
   }
 
   public double getSaldo() {
-    return saldo;
+    return this.movimientos.stream().mapToDouble(Movimiento::getMonto).sum() + this.saldoInicial;
   }
 
   public void setSaldo(double saldo) {
